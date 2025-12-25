@@ -1,5 +1,6 @@
 # libvpx
 原始仓来源：https://github.com/webmproject/libvpx
+
 仓库包含第三方开源软件libvpx，libvpx是vp8、vp9标准的视频编解码器。在OpenHarmony中，libvpx主要媒体子系统的基础组件，提供vp8、vp9码流的解码能力。
 ## 目录结构
 ```
@@ -40,7 +41,7 @@ name：解码器的名称（vp8或vp9）
 int vpx_codec_decode_api(void * vpxDecoder, const unsigned char *frame, unsigned int frame_size)
 vpxDecoder：解码器句柄
 frame：当前帧码流buffer
-frame_size：当前帧码子大小
+frame_size：当前帧码流大小
 返回值：0解码成功，非0解码失败
 ```
 （3）获取解码后图像
