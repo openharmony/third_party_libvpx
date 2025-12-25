@@ -1,0 +1,36 @@
+{
+    "name": "@ohos/libvpx",
+    "description": "libvpx provides a library for decode vp8/vp9 stream.",
+    "version": "1.15.2",
+    "license": "",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "//third_party/libvpx"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "libvpx",
+        "subsystem": "thirdparty",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [ "standard" ],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [ ]
+        },
+        "build": {
+            "sub_component": [ ],
+            "inner_kits": [
+                {
+                    "name": "//third_party/libvpx:vpxdec_ohos",
+                    "header": {
+                        "header_files": [ ],
+                        "header_base": "//third_party/libvpx"
+                    }
+                }],
+            "test": []
+        }
+    }
+}
