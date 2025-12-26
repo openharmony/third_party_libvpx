@@ -2,7 +2,7 @@
     "patches":[
         {
             "project":"multimedia_av_codec",
-            "path":"foundation/multimedia/multimedia_av_codec",
+            "path":"foundation/multimedia/av_codec",
             "pr_url":"https://gitcode.com/openharmony/multimedia_av_codec/pull/7257"
         },
         {
