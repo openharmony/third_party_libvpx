@@ -23,13 +23,79 @@
         <policylist>
             <policy name="projectPolicy" desc="">
                 <!--policyitem type="compatibility" name="GPL-2.0+" path="abc/.*" desc="Process that runs independently, invoked by the X process."/-->
-                <!--policyitem type="license" name="LGPL" path="abc/.*" desc="Dynamically linked by module X"/-->
-                <!--policyitem type="copyright" name="xxx" path="abc/.*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/-->
+                <policyitem type="license" name="BSD-3-Clause" path=".*" desc="Dynamically linked by module X"/>
+                <policyitem type="license" name="BSD-style" path=".*" desc="Dynamically linked by module X"/>
+                <policyitem type="license" name="ISC" path=".*" desc="Dynamically linked by module X"/> 
+                <policyitem type="license" name="BSDStyleLicense" path=".*" desc="Dynamically linked by module X"/>
+                <policyitem type="license" name="cancode-google-patent-license-webm" path=".*" desc="Dynamically linked by module X"/>
+                <policyitem type="copyright" name="Copyright (c) 2010 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2013 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2012 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2014 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2023 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2021 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2020 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2011 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2015 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2017 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2018 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2016 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2022 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2019 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2024 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2010 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2025 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2012 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2011 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2014 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2016 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2017 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2015 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2013 The LibYuv Project Authors. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2022 Loongson Technology Corporation Limited" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2021 Loongson Technology Corporation Limited" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2008 Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2009 Google Inc. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2024 Google Inc. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2013 Google Inc. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2014 Google Inc. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2008 Google Inc. All rights reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2024 Google Inc. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2013 Google Inc. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright 2014 Google Inc. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2010 The WebM project authors. All Rights Reserved.|Copyright (C) 2002-2010 The Xiph.Org Foundation and contributors." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (C) 2005-2019 x264 project" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="// Copyright 2007, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="// Copyright 2015, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
             </policy>
         </policylist>
         <filefilterlist>
             <filefilter name="defaultFilter" desc="Files not to check">
                 <filteritem type="filename" name="*.png" desc="original files"/>
+                <filteritem type="filename" name=".mailmap" desc="original files"/>
+                <filteritem type="filename" name="test-data.sha1" desc="original files"/>
+                <filteritem type="filename" name="CONTRIBUTORS" desc="original files"/>
+                <filteritem type="filename" name="exports_enc" desc="original files"/>
+                <filteritem type="filename" name="keywords.dox" desc="original files"/>
+                <filteritem type="filename" name="*.mk" desc="original files"/>
+                <filteritem type="filename" name="*.pde" desc="original files"/>
+                <filteritem type="filename" name="CHANGELOG" desc="original files"/>
+                <filteritem type="filename" name="exports_com" desc="original files"/>
+                <filteritem type="filename" name="ios-Info.plist" desc="original files"/>
+                <filteritem type="filename" name="exports_dec" desc="original files"/>
+                <filteritem type="filename" name="exports_enc" desc="original files"/>
+                <filteritem type="filename" name="codereview.settings" desc="original files"/>
+                <filteritem type="filename" name="configure" desc="original files"/>
+                <filteritem type="filename" name="AUTHORS.TXT" desc="original files"/>
+                <filteritem type="filename" name="usage.dox" desc="original files"/>
+                <filteritem type="filename" name="usage_cx.dox" desc="original files"/>
+                <filteritem type="filename" name="usage_dx.dox" desc="original files"/>
+                <filteritem type="filename" name="configure.sh" desc="original files"/>
+                <filteritem type="filename" name="README.libvpx" desc="original files"/>
+                <filteritem type="filename" name="mainpage.dox" desc="original files"/>
+                <filteritem type="filename" name="exports_dec" desc="original files"/>
+                
+                
                 <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
                 <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
@@ -66,14 +132,33 @@
 
         </filefilterlist>
         <licensematcherlist>
-            <!--licensematcher name="uvwxyz License" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
+            <licensematcher name="LicenseRef-scancode-google-patent-license-webm" desc="If the scanning result is InvalidLicense, you can define matching rules here. Note that quotation marks must be escaped.">
                 <licensetext name="
-                    uvwxyz license textA xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                    Additional IP Rights Grant (Patents)
+                    ------------------------------------
+
+                    &quot;These implementations&quot; means the copyrightable works that implement the WebM
+                    codecs distributed by Google as part of the WebM Project.
+
+                    Google hereby grants to you a perpetual, worldwide, non-exclusive, no-charge,
+                    royalty-free, irrevocable (except as stated in this section) patent license to
+                    make, have made, use, offer to sell, sell, import, transfer, and otherwise
+                    run, modify and propagate the contents of these implementations of WebM, where
+                    such license applies only to those patent claims, both currently owned by
+                    Google and acquired in the future, licensable by Google that are necessarily
+                    infringed by these implementations of WebM. This grant does not include claims
+                    that would be infringed only as a consequence of further modification of these
+                    implementations. If you or your agent or exclusive licensee institute or order
+                    or agree to the institution of patent litigation or any other patent
+                    enforcement activity against any entity (including a cross-claim or
+                    counterclaim in a lawsuit) alleging that any of these implementations of WebM
+                    or any code incorporated within any of these implementations of WebM
+                    constitute direct or contributory patent infringement, or inducement of
+                    patent infringement, then any patent rights granted to you under this License
+                    for these implementations of WebM shall terminate as of the date such
+                    litigation is filed.
 				 " desc=""/>
-                <licensetext name="
-                    uvwxyz license textB xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-				 " desc=""/>
-            </licensematcher-->
+            </licensematcher>
         </licensematcherlist>
     </oatconfig>
 </configuration>
