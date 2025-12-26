@@ -88,7 +88,6 @@ ohos_shared_library("vpxdec_ohos") {
     "video_writer.c",
     "y4menc.c",
     "y4minput.c",
-    "vpx_decoder_api.c",
       
     "./vpx/src/vpx_codec.c",
     "./vpx/src/vpx_decoder.c",
