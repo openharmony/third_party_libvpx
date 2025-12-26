@@ -26,6 +26,7 @@
                 <policyitem type="license" name="BSD-3-Clause" path=".*" desc="Dynamically linked by module X"/>
                 <policyitem type="license" name="BSD-style" path=".*" desc="Dynamically linked by module X"/>
                 <policyitem type="license" name="ISC" path=".*" desc="Dynamically linked by module X"/> 
+                <policyitem type="license" name="Public-domain" path=".*" desc="Dynamically linked by module X"/> 
                 <policyitem type="license" name="BSDStyleLicense" path=".*" desc="Dynamically linked by module X"/>
                 <policyitem type="license" name="cancode-google-patent-license-webm" path=".*" desc="Dynamically linked by module X"/>
                 <policyitem type="copyright" name="Copyright (c) 2010 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
@@ -67,6 +68,7 @@
                 <policyitem type="copyright" name="Copyright (C) 2005-2019 x264 project" path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
                 <policyitem type="copyright" name="// Copyright 2007, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
                 <policyitem type="copyright" name="// Copyright 2015, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="// Copyright 2016, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
             </policy>
         </policylist>
         <filefilterlist>
@@ -94,40 +96,54 @@
                 <filteritem type="filename" name="README.libvpx" desc="original files"/>
                 <filteritem type="filename" name="mainpage.dox" desc="original files"/>
                 <filteritem type="filename" name="exports_dec" desc="original files"/>
-                
-                
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
+                <filteritem type="filename" name="exports_dec" desc="original files"/>
+                <filteritem type="filename" name="gtest-spi.h" desc="original files"/>
+                <filteritem type="filename" name="gtest.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-test-part.h" desc="original files"/>
+                <filteritem type="filename" name="gtest_pred_impl.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-all.cc" desc="original files"/>
+                <filteritem type="filename" name="PATENTS.TXT" desc="original files"/>
+                <filteritem type="filename" name="PATENTS" desc="original files"/>
+                <filteritem type="filename" name="gtest.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-assertion-result.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-death-test.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-filepath.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-internal-inl.h" desc="original files"/>
+                <filteritem type="filename" name="gtest_main.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-matchers.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-port.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-printers.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-test-part.cc" desc="original files"/>
+                <filteritem type="filename" name="gtest-death-test-internal.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-filepath.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-internal.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-port.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-port-arch.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-string.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-printers.h" desc="original files"/>
+                <filteritem type="filename" name="gtest_prod.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-param-test.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-message.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-matchers.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-death-test.h" desc="original files"/>
+                <filteritem type="filename" name="gtest-assertion-result.h" desc="original files"/>
+                <filteritem type="filename" name="gtest.h" desc="original files"/>
+                <filteritem type="filename" name="y4minput.c" desc="original files"/>
+                <filteritem type="filename" name="y4minput.h" desc="original files"/>
+                <filteritem type="filename" name="md5_utils.h" desc="original files"/>
+                <filteritem type="filename" name="md5_utils.c" desc="original files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
-                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
-                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
             <filefilter name="licenseFileNamePolicyFilter" desc="Filters for LICENSE file policies">
-                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
             <filefilter name="readmeFileNamePolicyFilter" desc="Filters for README file policies">
-                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
             <filefilter name="readmeOpenSourcefileNamePolicyFilter" desc="Filters for README.OpenSource file policies">
-                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
             <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
-                <!--filteritem type="filename" name="*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="abcdefg/.*.uvwxyz" desc="Describe the reason for filtering scan results"/-->
-                <!--filteritem type="filepath" name="projectroot/[a-zA-Z0-9]{20,}.sh" desc="Temp files"/-->
             </filefilter>
 
         </filefilterlist>
