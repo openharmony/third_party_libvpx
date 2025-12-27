@@ -64,15 +64,18 @@ ohos_shared_library("vpxdec_ohos") {
     "-Wextra",
     "-Wpointer-arith",
     "-std=gnu99",
-    
-    "-march=armv8-a",
-    "-mfloat-abi=hard",
   ]
   
+  if (target_cpu == "arm" || target_cpu == "arm64") {
+    cflags += [
+      "-march=armv8-a",
+      "-mfloat-abi=hard",
+    ]
+  }
+    
   if (enable_neon) {
     cflags += [
       "-mfpu=neon",
-      "-mabi=hard"
     ]
   }
   
