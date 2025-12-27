@@ -29,33 +29,40 @@ System components in OpenHarmony need to reference the libvpx component in BUILD
 external_deps + = [libvpx:vpxdec_ohos]
 ```
 ### Decoding Steps Using libvpx
-（1）Create decoder
+（1）Decoder Initialization
 ```
-int vpx_create_decoder_api(void ** vpxDecoder, const char *name);
-vpxDecoder:：decoder handler
-name：name of decoder（vp8 or vp9）
-return value：0 means success，1 means fail
+vpx_codec_error_t vpx_codec_dec_init(vpx_codec_ctx_t *ctx, vpx_codec_iface_t *iface, const vpx_codec_dec_cfg_t *cfg, vpx_codec_flags_t flags)
+ctx: Pointer to the decoder instance.
+iface: Pointer to the codec algorithm interface to be used.
+cfg: Configuration parameters for the decoder; may be NULL.
+flags: A combination of VPX_CODEC_USE_* flags.
+return value: Returns 0 on successful initialization; a non-zero value indicates failure. Refer to the vpx_codec_err_t enumeration for error code descriptions.
+
 ```
 （2）Decode one frame
 ```
-int vpx_codec_decode_api(void * vpxDecoder, const unsigned char *frame, unsigned int frame_size)
-vpxDecoder：decoder handler
-frame：current frame bitstream buffer
-frame_size：current frame bitstream size
-return value：0 means success，1 means fail
+vpx_codec_err_t vpx_codec_decode(vpx_codec_ctx_t *ctx, const uint8_t *data, unsigned int data_sz, void *user_priv, long deadline)
+ctx: Pointer to the decoder instance.
+data: Pointer to the encoded data buffer for the current frame.
+data_sz: Size (in bytes) of the encoded data.
+user_priv: Optional user-defined private data associated with this frame; may be NULL.
+deadline: Soft deadline (in microseconds) that the decoder should attempt to meet. Set to 0 if no deadline constraint is required.
+return value: Returns 0 on success; a non-zero value indicates decoding failure. Refer to vpx_codec_err_t for error code details.
+
 ```
 （3）Get the decoded image
 ```
-int vpx_codec_get_frame_api(void * vpxDecoder, vpx_image_t **outputImg) 
-vpxDecoder：decoder handler
-outputmg：decoded image
-return value：0
+vpx_image_t *vpx_codec_get_frame(vpx_codec_ctx_t *ctx, vpx_codec_iter_t *iter)
+ctx: Pointer to the decoder instance.
+iter: Iterator pointer; must be initialized to NULL on the first call.
+return value: Returns a pointer to the decoded image frame, or NULL if no more frames are available.
 ```
 （4）Destroy the decoder
 ```
-int vpx_destroy_decoder_api(void ** vpxDecoder)
-vpxDecoder：decoder handler
-return value：0 means success，1 means fail
+vpx_codec_err_t vpx_codec_destroy(vpx_codec_ctx_t *ctx)
+ctx: Pointer to the decoder instance.
+return value: Returns 0 on successful destruction; a non-zero value indicates failure. Refer to vpx_codec_err_t for error code descriptions.
+
 ```
 ## Feature Support
 OpenHarmony currently integrates only the decoding capability of libvpx, used to parse VP8 and VP9 bitstreams. Video encoding is not supported yet.
