@@ -72,7 +72,7 @@ ohos_shared_library("vpxdec_ohos") {
   if (enable_neon) {
     cflags += [
       "-mfpu=neon",
-      "-m-abi=hard"
+      "-mabi=hard"
     ]
   }
   
