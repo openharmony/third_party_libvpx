@@ -41,7 +41,7 @@ flags：由VPX_CODEC_USE_*标志组成的
 ```
 （2）对某帧进行解码
 ```
-vpx_codec_err_t vpx_codec_decode(vpx_codec_ctx_t *ctx, const uint8_t *data, unsigned int data_sz, void *user_priv, long deadline);
+vpx_codec_err_t vpx_codec_decode(vpx_codec_ctx_t *ctx, const uint8_t *data, unsigned int data_sz, void *user_priv, long deadline)
 ctx：指向该解码器实例的指针
 data：当前编码数据块的指针
 data_sz：编码数据的大小
@@ -51,14 +51,14 @@ deadline：解码器应尝试满足的软截止时间（单位：微妙），如
 ```
 （3）获取解码后图像
 ```
-vpx_image_t *vpx_codec_get_frame(vpx_codec_ctx_t *ctx, vpx_codec_iter_t *iter);
+vpx_image_t *vpx_codec_get_frame(vpx_codec_ctx_t *ctx, vpx_codec_iter_t *iter)
 ctx：指向该解码器实例的指针
 iter：迭代器，首次使用应初始化为NULL
 返回值：指向已解码帧的图像
 ```
 （4）销毁解码器
 ```
-vpx_codec_err_t vpx_codec_destroy(vpx_codec_ctx_t *ctx);
+vpx_codec_err_t vpx_codec_destroy(vpx_codec_ctx_t *ctx)
 ctx：指向该解码器实例的指针
 返回值：0销毁解码器成功，非0销毁解码器失败，参考vpx_codec_err_t中错误码的说明
 ```
