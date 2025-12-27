@@ -81,7 +81,6 @@ static void setup_rtcd_internal(void)
     int flags = arm_cpu_caps();
 
     (void)flags;
-
 }
 #endif
 
