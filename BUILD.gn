@@ -24,13 +24,13 @@ declare_args() {
   enable_runtime_cpu_detect = 0
   enable_neon = true
   enable_avx512 = 0
-  enable_hdb = true
+  enable_hbd = true
 }
 
 ohos_shared_library("vpxdec_ohos") {
   defines = [
     "HAVE_CONFIG_H",
-    "VPX_SHARED_LIB=$enable_shared",
+    "VPX_SHARED_LIB=$enable_share",
     "CONFIG_VP8=$enable_vp8",
     "CONFIG_VP9=$enable_vp9",
     "CONFIG_MULTITHREAD=$enable_multithread",
@@ -79,7 +79,7 @@ ohos_shared_library("vpxdec_ohos") {
     "-Wl,-Bsymbolic",
     "-shared",
     "-Wl,-z,defs",
-    "-plthread",
+    "-lpthread",
   ]
   
   if (enable_debug_vpx) {
@@ -90,12 +90,10 @@ ohos_shared_library("vpxdec_ohos") {
   sources = [
     "vpxdec.c",
     "args.c",
-    "tools_common.c",
     "ivfdec.c",
     "ivfenc.c",
     "md5_utils.c",
     "rate_hist.c",
-    "tools/tiny_ssim.c",
     "tools_common.c",
     "video_reader.c",
     "video_writer.c",
@@ -113,7 +111,6 @@ ohos_shared_library("vpxdec_ohos") {
     "./vpx_dsp/loopfilter.c",
     "./vpx_dsp/prob.c",
     "./vpx_dsp/skin_detection.c",
-    "./vpx_dsp/variance.c",
     "./vpx_dsp/vpx_convolve.c",
     "./vpx_dsp/vpx_dsp_rtcd.c",
     
@@ -140,6 +137,17 @@ ohos_shared_library("vpxdec_ohos") {
     "./vp8/common/generic/systemdependent.c",
     "./vp8/common/idct_blk.c",
     "./vp8/common/idctllm.c",
+    "./vp8/common/loopfilter_filters.c",
+    "./vp8/common/mbpitch.c",
+    "./vp8/common/modecont.c",
+    "./vp8/common/quant_common.c",
+    "./vp8/common/reconinter.c",
+    "./vp8/common/reconintra.c",
+    "./vp8/common/reconintra4x4.c",
+    "./vp8/common/rtcd.c",
+    "./vp8/common/setupintrarecon.c",
+    "./vp8/common/swapyv12buffer.c",
+    "./vp8/common/treecoder.c",
     "./vp8/common/vp8_loopfilter.c",
     "./vp8/decoder/dboolhuff.c",
     "./vp8/decoder/decodeframe.c",
