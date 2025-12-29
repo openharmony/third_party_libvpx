@@ -28,6 +28,7 @@ declare_args() {
 }
 
 ohos_shared_library("vpxdec_ohos") {
+if (!is_emulator && target_cpu =="arm64") {
   defines = [
     "HAVE_CONFIG_H",
     "VPX_SHARED_LIB=$enable_share",
@@ -277,7 +278,7 @@ ohos_shared_library("vpxdec_ohos") {
   }
   
   external_deps = []
-  
+}
   subsystem_name = "thirdparty"
   part_name = "libvpx"
 }
