@@ -1,7 +1,7 @@
 # libvpx
-原始仓来源：https://github.com/webmproject/libvpx
+原始仓来源：https://chromium.googlesource.com/webm/libvpx
 
-仓库包含第三方开源软件libvpx，libvpx是vp8、vp9标准的视频编解码器。在OpenHarmony中，libvpx主要媒体子系统的基础组件，提供vp8、vp9码流的解码能力。
+仓库包含第三方开源软件libvpx，libvpx是vp8、vp9标准的视频编解码器。在OpenHarmony中，libvpx主要媒体子系统的基础部件，提供vp8、vp9码流的解码能力。
 ## 目录结构
 ```
 //third_party_libvpx
