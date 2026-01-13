@@ -1,5 +1,5 @@
 # libvpx
-Original Repository：https://github.com/webmproject/libvpx
+Original Repository：https://chromium.googlesource.com/webm/libvpx
 
 The repository includes the third-party open-source software libvpx, which is a video codec implementation for the VP8 and VP9 standars. In OpenHarmony, libvpx serves as a fundamental component of the media subsystem, providing decoding capabilities for VP8 and VP9 video streams.
 ## Directory Structure
