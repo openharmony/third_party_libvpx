@@ -17,29 +17,61 @@ declare_args() {
   enable_debug_vpx = false
   enable_share = 1
   enable_static = 0
-  enable_vp8 = 1
-  enable_vp9 = 1
-  enable_multithread = 1
-  enable_postproc = 0
-  enable_runtime_cpu_detect = 0
   enable_neon = true
   enable_avx512 = 0
   enable_hbd = true
 }
 
+out_dir = root_out_dir + "/third_party_libvpx"
+code_dir = out_dir
+
+action("generate_vpx_config_headers") {
+  script = "//third_party/libvpx/build.sh"
+
+  inputs = [
+    "build.sh",
+    "configure",
+  ]
+  
+  args = [
+    rebase_path(out_dir),
+    target_cpu,
+  ]
+
+  outputs = [
+    "$code_dir/vpx_config.h",
+  ]
+  
+}
+
+version_header = "$target_gen_dir/vpx_version.h"
+
+config("vpx_header") {
+  include_dirs = [ 
+    "//third_party/libvpx",
+    "//third_party/libvpx/vpx",
+    "$root_out_dir/third_party_libvpx" 
+  ]
+}
+
 ohos_shared_library("vpxdec_ohos") {
-if (!is_emulator && target_cpu =="arm64") {
+  public_configs = [ ":vpx_header" ]
+
+  write_file(version_header, "")
+
   defines = [
     "HAVE_CONFIG_H",
     "VPX_SHARED_LIB=$enable_share",
-    "CONFIG_VP8=$enable_vp8",
-    "CONFIG_VP9=$enable_vp9",
-    "CONFIG_MULTITHREAD=$enable_multithread",
-    "CONFIG_POSTPROC=$enable_postproc",
-    "CONFIG_RUNTIME_CPU_DETECT=$enable_runtime_cpu_detect",
     "__OHOS__",
-    "CONFIG_OS = OHOS",
-    "CONFIG_ARCH = ARM64",
+    "CONFIG_OS=OHOS",
+    "CONFIG_ARCH=ARM64",
+    "VERSION_MAJOR=1",
+    "VERSION_MINOR=15",
+    "VERSION_PATCH=2",
+    "VERSION_EXTRA=\"\"",
+    "VERSION_PACKED=69378",
+    "VERSION_STRING_NOSP=\"v1.15.2\"",
+    "VERSION_STRING=\"v1.15.2\"",
   ]
   
   sanitize = {
@@ -65,15 +97,9 @@ if (!is_emulator && target_cpu =="arm64") {
     "-Wextra",
     "-Wpointer-arith",
     "-std=gnu99",
+    "-mfloat-abi=hard",
   ]
   
-  if (target_cpu == "arm" || target_cpu == "arm64") {
-    cflags += [
-      "-march=armv8-a",
-      "-mfloat-abi=hard",
-    ]
-  }
-    
   if (enable_neon) {
     cflags += [
       "-mfpu=neon",
@@ -92,6 +118,10 @@ if (!is_emulator && target_cpu =="arm64") {
     ldflags += ["-g"]
   }
   
+  deps = [ 
+    ":generate_vpx_config_headers" ,
+  ]
+
   sources = [
     "vpxdec.c",
     "args.c",
@@ -194,6 +224,7 @@ if (!is_emulator && target_cpu =="arm64") {
   
   include_dirs = [
     "./",
+    "$code_dir",
     "./vpx",
     "./vpx/internel",
     "./vpx_dsp",
@@ -208,8 +239,14 @@ if (!is_emulator && target_cpu =="arm64") {
     "./vp8/decoder",
     "./vp9",
     "./vp9/common",
-    "./vp9/decoder"
+    "./vp9/decoder",
+    "$target_gen_dir",
   ]
+  if (target_cpu =="arm64") {
+    include_dirs += ["./armv8_config"]
+  } else {
+    include_dirs += ["./armv7_config"]
+  }
   
   if (enable_neon) {
     sources += [
@@ -278,7 +315,7 @@ if (!is_emulator && target_cpu =="arm64") {
   }
   
   external_deps = []
-}
+  
   subsystem_name = "thirdparty"
   part_name = "libvpx"
 }
