@@ -23,7 +23,7 @@
 |-- vpx_util
 ```
 ## OpenHarmony如何使用libvpx
-OpenHarmony的系统部件需要在BUILG.gn中引用libvpx部件以使用libppx。
+OpenHarmony的系统部件需要在BUILG.gn中引用libvpx部件以使用libvpx。
 ```
 // BUILD.gn
 external_deps + = [libvpx:vpxdec_ohos]
