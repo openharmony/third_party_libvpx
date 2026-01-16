@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "libvpx",
+        "License": "BSD 3-Clause License",
+        "License File": "LICENSE",
+        "Version Number": "v1.15.2",
+        "Owner": "wangwei234@huawei.com",
+        "Upstream URL": "https://chromium.googlesource.com/webm/libvpx",
+        "Description": "libvpx is a video codec implementation for the VP8 and VP9 standards."
+    }
+]
