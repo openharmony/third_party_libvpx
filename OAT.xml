@@ -134,6 +134,7 @@
                 <filteritem type="filename" name="md5_utils.h" desc="original files"/>
                 <filteritem type="filename" name="md5_utils.c" desc="original files"/>
                 <filteritem type="filename" name="build.sh" desc="original files"/>
+                <filteritem type="filepath" name="README.OpenSource " desc="readme.opensource"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
             </filefilter>
