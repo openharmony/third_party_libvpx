@@ -69,6 +69,7 @@
                 <policyitem type="copyright" name="// Copyright 2007, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
                 <policyitem type="copyright" name="// Copyright 2015, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
                 <policyitem type="copyright" name="// Copyright 2016, Google Inc." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
+                <policyitem type="copyright" name="Copyright (c) 2026 The WebM project authors. All Rights Reserved." path=".*" rule="may" group="defaultGroup" filefilter="copyrightPolicyFilter" desc="Developed by X Company"/>
             </policy>
         </policylist>
         <filefilterlist>
@@ -132,6 +133,7 @@
                 <filteritem type="filename" name="y4minput.h" desc="original files"/>
                 <filteritem type="filename" name="md5_utils.h" desc="original files"/>
                 <filteritem type="filename" name="md5_utils.c" desc="original files"/>
+                <filteritem type="filename" name="build.sh" desc="original files"/>
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
             </filefilter>
