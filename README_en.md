@@ -67,4 +67,4 @@ return value: Returns 0 on successful destruction; a non-zero value indicates fa
 ## Feature Support
 OpenHarmony currently integrates only the decoding capability of libvpx, used to parse VP8 and VP9 bitstreams. Video encoding is not supported yet.
 ## License
-See the LICENSE.md file in the root directory for details.
+See the LICENSE file in the root directory for details.

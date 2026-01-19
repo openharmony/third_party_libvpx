@@ -65,4 +65,4 @@ ctx：指向该解码器实例的指针
 ## 功能支持说明
 OpenHarmony目前仅集成了libvpx的解码能力，用于解析vp8和vp9的码流，暂不支持视频编码功能。
 ## License
-详见仓库目录下的LICENSE.md文件
+详见仓库目录下的LICENSE文件
