@@ -5,8 +5,10 @@
 ## 目录结构
 ```
 //third_party_libvpx
-|-- BUILD.gn       # GN构建配置文件，定义编译规则和依赖关系
-|-- bundle.json    # 组件包配置文件，描述组件信息和依赖
+|-- BUILD.gn       # GN构建配置文件，定义编译规则和依赖关系。由OpenHarmony增加
+|-- bundle.json    # 组件包配置文件，描述组件信息和依赖。由OpenHarmony增加
+|-- armv7_config   # armv7配置文件。由OpenHarmony增加
+|-- armv8_config   # armv8配置文件。由OpenHarmony增加
 |-- build          # 工程构建目录，编译构建工具、脚本等
 |-- build_debug    # 调试版本构建目录
 |-- examples       # 示例代码目录
@@ -79,5 +81,6 @@ ctx：指向该解码器实例的指针
 ```
 ## 功能支持说明
 OpenHarmony目前仅集成了libvpx的解码能力，用于解析VP8和VP9的码流，暂不支持视频编码功能。
+OpenHarmony不强制要求设备厂商支持VP8/VP9的解码功能,且无强制profile、level的要求。
 ## License
 详见仓库目录下的LICENSE文件
