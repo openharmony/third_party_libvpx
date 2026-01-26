@@ -5,8 +5,10 @@ The repository includes the third-party open-source software libvpx, which is a 
 ## Directory Structure
 ```
 //third_party_libvpx
-|-- BUILD.gn       # GN build configuration file, defines build rules and dependencies
-|-- bundle.json    # Component package configuration file, describes component information and dependencies
+|-- BUILD.gn       # GN build configuration file, defines build rules and dependencies. Added by OpenHarmony
+|-- bundle.json    # Component package configuration file, describes component information and dependencies. Added by OpenHarmony
+|-- armv7_config   # armv7 configuration files. Added by OpenHarmony
+|-- armv8_config   # armv8 configuration files. Added by OpenHarmony
 |-- build          # Build system directory, contains build tools and scripts
 |-- build_debug    # Debug build output directory
 |-- examples       # Example code directory
@@ -81,5 +83,6 @@ return value: Returns 0 on successful destruction; a non-zero value indicates fa
 ```
 ## Feature Support
 OpenHarmony currently integrates only the decoding capability of libvpx, used to parse VP8 and VP9 bitstreams. Video encoding is not supported yet.
+OpenHarmony does not mandate that device manufacturers support VP8/VP9 decoding, nor does it impose any compulsory profile or level requirements.
 ## License
 See the LICENSE file in the root directory for details.
