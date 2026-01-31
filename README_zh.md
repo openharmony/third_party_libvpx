@@ -25,62 +25,100 @@
 |-- vpx_util       # 工具类和通用功能
 ```
 ## OpenHarmony如何使用libvpx
-在OpenHarmony中，系统部件通过BUILD.gn文件引用libvpx部件，以集成并使用其编解码能力。
+在OpenHarmony中，系统部件通过BUILD.gn文件引用libvpx部件，以集成并使用其VP8、VP9的解码能力。
 ```
 // BUILD.gn
 external_deps + = [libvpx:vpxdec_ohos]
 ```
-### vpx_codec_err_t错误码说明
-以下为vpx/vpx_codec.h中的vpx_codec_err_t错误码。
 
-| 错误码 | 错误信息                                        |
-| -------- | ---------------------------------------     |
-| VPX_CODEC_OK                | 操作成功完成，无错误。       |
-| VPX_CODEC_ERROR             | 未指定的错误。              |
-| VPX_CODEC_MEM_ERROR         | 内存操作失败。              |
-| VPX_CODEC_ABI_MISMATCH      | 版本不匹配。                |
-| PX_CODEC_INCAPABLE          | 算法不具备所需功能。         |
-| VPX_CODEC_UNSUP_BITSTREAM   | 给定的码流不受支持。         |
-| VPX_CODEC_UNSUP_FEATURE     | 编码码流使用了不受支持的功能。 |
-| VPX_CODEC_CORRUPT_FRAME     | 该码流的数据已损坏或不完整。  |
-| VPX_CODEC_INVALID_PARAM     | 应用程序提供的参数无效。     |
-| VPX_CODEC_LIST_END          | 迭代器已到达列表末尾。       |
-
-### 使用libvpx库解码步骤
-（1）解码器初始化
-```
-vpx_codec_error_t vpx_codec_dec_init(vpx_codec_ctx_t *ctx, vpx_codec_iface_t *iface, cfg, vpx_codec_flags_t flags)
-ctx：指向该解码器实例的指针
-iface：指向要使用的编解码算法的指针
-cfg：使用的配置参数，可为NULL
-flags：由VPX_CODEC_USE_*标志组成的
-返回值：0解码器初始化成功，非0解码器初始化失败，参考vpx_codec_err_t中错误码的说明
-```
-（2）对某帧进行解码
-```
-vpx_codec_err_t vpx_codec_decode(vpx_codec_ctx_t *ctx, const uint8_t *data, unsigned int data_sz, void *user_priv, long deadline)
-ctx：指向该解码器实例的指针
-data：当前编码数据块的指针
-data_sz：编码数据的大小
-user_priv：与该帧关联的自定义数据，可为nullptr
-deadline：期望的解码截止时间（单位：微妙），如果不限制，则设为0
-返回值：0解码成功，非0解码失败，参考vpx_codec_err_t中错误码的说明
-```
-（3）获取解码后图像
-```
-vpx_image_t *vpx_codec_get_frame(vpx_codec_ctx_t *ctx, vpx_codec_iter_t *iter)
-ctx：指向该解码器实例的指针
-iter：迭代器，首次使用应初始化为NULL
-返回值：指向已解码帧的图像
-```
-（4）销毁解码器
-```
-vpx_codec_err_t vpx_codec_destroy(vpx_codec_ctx_t *ctx)
-ctx：指向该解码器实例的指针
-返回值：0销毁解码器成功，非0销毁解码器失败，参考vpx_codec_err_t中错误码的说明
-```
 ## 功能支持说明
-OpenHarmony目前仅集成了libvpx的解码能力，用于解析VP8和VP9的码流，暂不支持视频编码功能。
-OpenHarmony不强制要求设备厂商支持VP8/VP9的解码功能,且无强制profile、level的要求。
+**以下说明适用起始版本：** 6.1
+
+(1) 应用在创建VP8/VP9解码器时，按照[平台统一规则](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/avcodec/avcodec-support-formats.md)系统会优先创建硬件解码器，如无硬件解码器或则硬件解码器资源不足时创建软件解码器（当前AVCodec尚不支持AV1的硬解），如无解码能力则创建失败。
+
+(2) VP8、VP9软解码均为OpenHamony中的可选能力。厂商可通过配置文件开关其软解码功能，配置文件路径可以如下：
+```
+//vendor/${pruduct_company}/${product_name}/config.json
+```
+配置方式可以如下，在av_codec部件节点的features中配置av_codec_support_av1_decoder：
+```json
+"multimedia:av_codec": {
+    "features": {
+        "av_codec_support_vp8_decoder：": false,
+        "av_codec_support_vp9_decoder：": false,
+    }
+}
+```
+(3) 按[Openharmony产品兼容性规范](https://www.openharmony.cn/systematic)，若支持VP8软件解码时，VP8解码建议规格至少为1080p@30fps。
+
+(4) 按[Openharmony产品兼容性规范](https://www.openharmony.cn/systematic)，若支持VP9软件解码时，VP9解码建议规格至少为1080p@30fps(profile 0、profile 1， level 4.0)。厂商可以在AVCodec源码中修改VP9支持的Profile与Level，路径如下：
+```
+//foundation/multimedia/avcodec/services/engine/codec/video/vpxdecoder/vpxDecoder.cpp
+```
+在GetVP9CapProf函数中，修改对出参capaArray(成员profileLevelsMap记录支持情况)的赋值，完成后重新编译：
+```C++
+void Av1Decoder::GetVP9CapProf(std::vector<CapabilityData> &capaArray)
+{
+    ...
+    CapabilityData &capsData = capaArray.back();
+    ...
+    // 赋值支持的profile，例如支持VP9 Profile 0，Profile 1
+    capsData.profile = {
+        static_cast<int32_t>(VP9_PROFILE_0),
+        static_cast<int32_t>(VP9_PROFILE_1)
+    };
+    std::vector<int32_t> levels；
+    // 赋值profile下支持的level，例如Profile 0支持到level 4.0
+    for (int32_t j = 0; j <= static_cast<int32_t>(VP9Level::VP9_LEVEL_40); j++) {
+        levels.emplace_back(j);
+    }
+    capsData.profileLevelsMap.insert({static_cast<int32_t>(VP9_PROFILE_0), levels}); // 赋值profile下支持的level
+    ...
+}
+```
+上述Profile和Level均按照VP9标准进行了完整的定义，在AVCodec仓的[avcodec_info.h](https://gitcode.com/openharmony/multimedia_av_codec/blob/master/interfaces/inner_api/native/avcodec_info.h)中：
+```C
+enum VP9Profile {
+    VP9_PROFILE_0 = 0,
+    VP9_PROFILE_1 = 1,
+    VP9_PROFILE_2 = 2,
+    VP9_PROFILE_3 = 3,
+};
+
+enum VP9Level {
+    VP9_LEVEL_1 = 0,
+    VP9_LEVEL_11 = 1,
+    VP9_LEVEL_2 = 2,
+    ...
+    VP9_LEVEL_6 = 11,
+    VP9_LEVEL_61 = 12,
+    VP9_LEVEL_62 = 13,
+};
+```
+若需要应用开发者感知，还需要同时在[SDK仓](https://gitcode.com/openharmony/interface_sdk_c/blob/master/multimedia/av_codec/native_avcodec_base.h)和[AVCodec仓](https://gitcode.com/openharmony/multimedia_av_codec/blob/master/interfaces/kits/c/native_avcodec_base.h)的native_avcodec_base.h中定义:
+```C
+typedef enum OH_VP9Profile {
+    VP9_PROFILE_0 = 0,
+    VP9_PROFILE_1 = 1,
+    VP9_PROFILE_2 = 2,
+    VP9_PROFILE_3 = 3,
+} OH_VP9Profile;
+
+typedef enum OH_VP9Level {
+    VP9_LEVEL_1 = 0,
+    VP9_LEVEL_11 = 1,
+    VP9_LEVEL_2 = 2,
+    ...
+    VP9_LEVEL_6 = 11,
+    VP9_LEVEL_61 = 12,
+    VP9_LEVEL_62 = 13,
+} OH_VP9Level;
+```
+完整的定义描述可见资料：[OH_VP9Profile](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-avcodec-kit/capi-native-avcodec-base-h.md#oh_vp9profile)，[OH_VP9level](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-avcodec-kit/capi-native-avcodec-base-h.md#oh_vp9level).
+
+另外，若VP9需要支持profile 2、profile 3时，需要显示系统（中surfaceBuffer）支持12bit。
+
+(4) 上述开关及能力的配置，应用开发者都可以通过AVCodec的接口查询到。详见[获取支持的编解码能力](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/avcodec/obtain-supported-codecs.md)， [查询编解码档次和级别支持情况](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/media/avcodec/obtain-supported-codecs.md#%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%A7%A3%E7%A0%81%E6%A1%A3%E6%AC%A1%E5%92%8C%E7%BA%A7%E5%88%AB%E6%94%AF%E6%8C%81%E6%83%85%E5%86%B5)。
+
 ## License
 详见仓库目录下的LICENSE文件
