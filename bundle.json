@@ -2,10 +2,10 @@
     "name": "@ohos/libvpx",
     "description": "libvpx provides a library for decode vp8/vp9 stream.",
     "version": "1.15.2",
-    "license": "",
+    "license": "BSD-3-Clause",
     "publishAs": "code-segment",
     "segment": {
-        "destPath": "//third_party/libvpx"
+        "destPath": "third_party/libvpx"
     },
     "dirs": {},
     "scripts": {},
