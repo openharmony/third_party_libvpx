@@ -21,12 +21,17 @@
             "components": [ ]
         },
         "build": {
-            "sub_component": [ ],
+            "sub_component": ["//third_party/libvpx:vpxdec_ohos"],
             "inner_kits": [
                 {
+                    "type": "so",
                     "name": "//third_party/libvpx:vpxdec_ohos",
                     "header": {
-                        "header_files": [ ],
+                        "header_files": [
+                            "vpx/vpx_decoder.h",
+                            "tools_common.h",
+                            "video_reader.h"
+                        ],
                         "header_base": "//third_party/libvpx"
                     }
                 }],
