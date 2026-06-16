@@ -24,6 +24,10 @@ declare_args() {
 
 out_dir = root_out_dir + "/third_party_libvpx"
 code_dir = out_dir
+is_vpx_x86_64 = target_cpu == "x86_64"
+is_vpx_arm64 = target_cpu == "arm64"
+is_vpx_arm = target_cpu == "arm"
+use_vpx_neon = enable_neon && (is_vpx_arm64 || is_vpx_arm)
 
 action("generate_vpx_config_headers") {
   script = "//third_party/libvpx/build.sh"
@@ -38,9 +42,15 @@ action("generate_vpx_config_headers") {
     target_cpu,
   ]
 
-  outputs = [
-    "$code_dir/vpx_config.h",
-  ]
+  outputs = [ "$code_dir/vpx_config.h" ]
+  if (is_vpx_x86_64) {
+    outputs += [
+      "$code_dir/vp8_rtcd.h",
+      "$code_dir/vp9_rtcd.h",
+      "$code_dir/vpx_dsp_rtcd.h",
+      "$code_dir/vpx_scale_rtcd.h",
+    ]
+  }
   
 }
 
@@ -64,7 +74,6 @@ ohos_shared_library("vpxdec_ohos") {
     "VPX_SHARED_LIB=$enable_share",
     "__OHOS__",
     "CONFIG_OS=OHOS",
-    "CONFIG_ARCH=ARM64",
     "VERSION_MAJOR=1",
     "VERSION_MINOR=15",
     "VERSION_PATCH=2",
@@ -73,6 +82,13 @@ ohos_shared_library("vpxdec_ohos") {
     "VERSION_STRING_NOSP=\"v1.15.2\"",
     "VERSION_STRING=\"v1.15.2\"",
   ]
+  if (is_vpx_arm64) {
+    defines += [ "CONFIG_ARCH=ARM64" ]
+  } else if (is_vpx_arm) {
+    defines += [ "CONFIG_ARCH=ARM" ]
+  } else if (is_vpx_x86_64) {
+    defines += [ "CONFIG_ARCH=X86_64" ]
+  }
   
   sanitize = {
     cfi = true
@@ -97,10 +113,12 @@ ohos_shared_library("vpxdec_ohos") {
     "-Wextra",
     "-Wpointer-arith",
     "-std=gnu99",
-    "-mfloat-abi=hard",
   ]
+  if (is_vpx_arm) {
+    cflags += [ "-mfloat-abi=hard" ]
+  }
   
-  if (enable_neon) {
+  if (is_vpx_arm && use_vpx_neon) {
     cflags += [
       "-mfpu=neon",
     ]
@@ -150,7 +168,6 @@ ohos_shared_library("vpxdec_ohos") {
     "./vpx_dsp/vpx_dsp_rtcd.c",
     
     "./vpx_mem/vpx_mem.c",
-    "./vpx_ports/aarch64_cpudetect.c",            
     "./vpx_scale/generic/gen_scalers.c",
     "./vpx_scale/generic/vpx_scale.c",
     "./vpx_scale/generic/yv12config.c",
@@ -221,6 +238,11 @@ ohos_shared_library("vpxdec_ohos") {
     "./vp9/decoder/vp9_dsubexp.c",
     "./vp9/decoder/vp9_job_queue.c",
   ]
+  if (is_vpx_arm64) {
+    sources += [ "./vpx_ports/aarch64_cpudetect.c" ]
+  } else if (is_vpx_arm) {
+    sources += [ "./vpx_ports/aarch32_cpudetect.c" ]
+  }
   
   include_dirs = [
     "./",
@@ -242,13 +264,13 @@ ohos_shared_library("vpxdec_ohos") {
     "./vp9/decoder",
     "$target_gen_dir",
   ]
-  if (target_cpu =="arm64") {
+  if (is_vpx_arm64) {
     include_dirs += ["./armv8_config"]
-  } else {
+  } else if (is_vpx_arm) {
     include_dirs += ["./armv7_config"]
   }
   
-  if (enable_neon) {
+  if (use_vpx_neon) {
     sources += [
       "./vpx_dsp/arm/idct16x16_1_add_neon.c",
       "./vpx_dsp/arm/idct16x16_add_neon.c",
