@@ -90,6 +90,7 @@ ohos_shared_library("vpxdec_ohos") {
     defines += [ "CONFIG_ARCH=X86_64" ]
   }
   
+  branch_protector_ret = "pac_ret"
   sanitize = {
     cfi = true
     cfi_cross_dso = true
