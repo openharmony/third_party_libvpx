@@ -18,15 +18,14 @@ rm -f "$OUTPUT_DIR/vp8_rtcd.h" "$OUTPUT_DIR/vp9_rtcd.h" \
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "$SCRIPT_DIR"
-
-if [ ! -f "./configure" ]; then
+if [ ! -f "${SCRIPT_DIR}/configure" ]; then
   echo "ERROR: configure not found in $SCRIPT_DIR"
   exit 1
 fi
 
+cd $OUTPUT_DIR
 if [ "$CPU" == "arm64" ]; then
-  ./configure \
+  ${SCRIPT_DIR}/configure \
       --target=armv8-linux-gcc  \
       --enable-vp9-highbitdepth \
       --disable-vp8-encoder \
@@ -40,7 +39,7 @@ if [ "$CPU" == "arm64" ]; then
 fi
 
 if [ "$CPU" == "arm" ]; then
-  ./configure \
+  ${SCRIPT_DIR}/configure \
       --target=armv7-linux-gcc  \
       --enable-vp9-highbitdepth \
       --disable-vp8-encoder \
@@ -55,7 +54,7 @@ if [ "$CPU" == "arm" ]; then
 fi
 
 if [ "$CPU" == "x86_64" ]; then
-  ./configure \
+  ${SCRIPT_DIR}/configure \
       --target=generic-gnu \
       --enable-vp9-highbitdepth \
       --disable-vp8-encoder \
@@ -84,23 +83,20 @@ CONFIG_WEBM_IO=no
 CONFIG_LIBYUV=no
 EOF
 
-  perl build/make/rtcd.pl --arch=generic --sym=vp8_rtcd \
-      --config=rtcd_config.mk vp8/common/rtcd_defs.pl > vp8_rtcd.h
-  perl build/make/rtcd.pl --arch=generic --sym=vp9_rtcd \
-      --config=rtcd_config.mk vp9/common/vp9_rtcd_defs.pl > vp9_rtcd.h
-  perl build/make/rtcd.pl --arch=generic --sym=vpx_dsp_rtcd \
-      --config=rtcd_config.mk vpx_dsp/vpx_dsp_rtcd_defs.pl > vpx_dsp_rtcd.h
-  perl build/make/rtcd.pl --arch=generic --sym=vpx_scale_rtcd \
-      --config=rtcd_config.mk vpx_scale/vpx_scale_rtcd.pl > vpx_scale_rtcd.h
+  perl ${SCRIPT_DIR}/build/make/rtcd.pl --arch=generic --sym=vp8_rtcd \
+      --config=rtcd_config.mk ${SCRIPT_DIR}/vp8/common/rtcd_defs.pl > vp8_rtcd.h
+  perl ${SCRIPT_DIR}/build/make/rtcd.pl --arch=generic --sym=vp9_rtcd \
+      --config=rtcd_config.mk ${SCRIPT_DIR}/vp9/common/vp9_rtcd_defs.pl > vp9_rtcd.h
+  perl ${SCRIPT_DIR}/build/make/rtcd.pl --arch=generic --sym=vpx_dsp_rtcd \
+      --config=rtcd_config.mk ${SCRIPT_DIR}/vpx_dsp/vpx_dsp_rtcd_defs.pl > vpx_dsp_rtcd.h
+  perl ${SCRIPT_DIR}/build/make/rtcd.pl --arch=generic --sym=vpx_scale_rtcd \
+      --config=rtcd_config.mk ${SCRIPT_DIR}/vpx_scale/vpx_scale_rtcd.pl > vpx_scale_rtcd.h
 
   sed -i 's/#define CONFIG_INSTALL_DOCS[[:space:]]*1/#define CONFIG_INSTALL_DOCS 0/' vpx_config.h
   sed -i 's/#define CONFIG_POSTPROC[[:space:]]*1/#define CONFIG_POSTPROC 0/' vpx_config.h
   sed -i 's/#define CONFIG_MULTITHREAD[[:space:]]*0/#define CONFIG_MULTITHREAD 1/' vpx_config.h
   sed -i 's/#define CONFIG_RUNTIME_CPU_DETECT[[:space:]]*1/#define CONFIG_RUNTIME_CPU_DETECT 0/' vpx_config.h
 
-  cp vpx_config.h vp8_rtcd.h vp9_rtcd.h vpx_dsp_rtcd.h vpx_scale_rtcd.h "$OUTPUT_DIR/"
-  rm -f rtcd_config.mk
-  rm -f vpx_config.h vp8_rtcd.h vp9_rtcd.h vpx_dsp_rtcd.h vpx_scale_rtcd.h
   exit 0
 fi
 
@@ -114,5 +110,4 @@ sed -i 's/#define CONFIG_POSTPROC[[:space:]]*1/#define CONFIG_POSTPROC 0/' vpx_c
 sed -i 's/#define CONFIG_MULTITHREAD[[:space:]]*0/#define CONFIG_MULTITHREAD 1/' vpx_config.h
 sed -i 's/#define CONFIG_RUNTIME_CPU_DETECT[[:space:]]*1/#define CONFIG_RUNTIME_CPU_DETECT 0/' vpx_config.h
 
-cp vpx_config.h "$OUTPUT_DIR/"
-rm -f vpx_config.h
+cd "$SCRIPT_DIR"
