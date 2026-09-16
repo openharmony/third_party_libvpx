@@ -57,10 +57,11 @@ action("generate_vpx_config_headers") {
 version_header = "$target_gen_dir/vpx_version.h"
 
 config("vpx_header") {
-  include_dirs = [ 
+  include_dirs = [
+    "$root_out_dir/third_party_libvpx",
     "//third_party/libvpx",
     "//third_party/libvpx/vpx",
-    "$root_out_dir/third_party_libvpx" 
+
   ]
 }
 
@@ -246,8 +247,8 @@ ohos_shared_library("vpxdec_ohos") {
   }
   
   include_dirs = [
-    "./",
     "$code_dir",
+    "./",
     "./vpx",
     "./vpx/internel",
     "./vpx_dsp",
