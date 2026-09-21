@@ -1,0 +1,81 @@
+# Copyright (C) 2026 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+
+# Version script for libvpxdec_ohos.so
+#
+# Only export the public vpx_codec API.
+# All internal VP8/VP9 implementation details, DSP functions, and tools
+# must be hidden to reduce binary size and prevent symbol collisions.
+
+VPXDEC_OHOS_1.0 {
+  global:
+    extern "C" {
+      /* Core Codec Interface */
+      vpx_codec_dec_init_ver;
+      vpx_codec_decode;
+      vpx_codec_get_frame;
+      vpx_codec_get_stream_info;
+      vpx_codec_peek_stream_info;
+      vpx_codec_control_;
+      vpx_codec_destroy;
+      vpx_codec_error;
+      vpx_codec_error_detail;
+      vpx_codec_err_to_string;
+      vpx_codec_get_caps;
+      vpx_codec_version;
+      vpx_codec_version_str;
+      vpx_codec_version_extra_str;
+      vpx_codec_iface_name;
+      
+      /* Callbacks & Frame Buffer Management */
+      vpx_codec_register_put_frame_cb;
+      vpx_codec_register_put_slice_cb;
+      vpx_codec_set_frame_buffer_functions;
+      
+      /* Decoder Interfaces (VP8/VP9) */
+      vpx_codec_vp8_dx;
+      vpx_codec_vp9_dx;
+      
+      /* Image Utilities (Often used by decoders) */
+      vpx_img_alloc;
+      vpx_img_free;
+      vpx_img_wrap;
+      vpx_img_set_rect;
+      vpx_img_plane_width;
+      vpx_img_plane_height;
+      vpx_img_read;
+      vpx_img_write;
+      vpx_img_downshift;
+      vpx_img_upshift;
+      vpx_img_truncate_16_to_8;
+      vpx_img_flip;
+      
+      /* Memory Management (If exposed publicly) */
+      vpx_malloc;
+      vpx_calloc;
+      vpx_free;
+      vpx_memalign;
+      
+      /* Worker Interface (If used by external threads) */
+      vpx_get_worker_interface;
+      vpx_set_worker_interface;
+
+      get_vpx_decoder_by_name;
+      get_vpx_decoder_by_index;
+      get_vpx_decoder_by_fourcc;
+      get_vpx_decoder_count;
+    };
+
+  local:
+    *;
+};
