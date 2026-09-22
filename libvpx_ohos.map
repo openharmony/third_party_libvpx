@@ -21,6 +21,7 @@ VPXDEC_OHOS_1.0 {
   global:
     extern "C" {
       /* Core Codec Interface */
+      vpx_codec_build_config;
       vpx_codec_dec_init_ver;
       vpx_codec_decode;
       vpx_codec_get_frame;
