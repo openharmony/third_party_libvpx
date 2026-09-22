@@ -132,6 +132,8 @@ ohos_shared_library("vpxdec_ohos") {
     "-Wl,-z,defs",
     "-lpthread",
   ]
+
+  version_script = "libvpx_ohos.map"
   
   if (enable_debug_vpx) {
     cflags += ["-g","--ggdb"]
